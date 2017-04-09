@@ -3,20 +3,20 @@
   <body>
     <div ng-app="myApp" ng-controller="myCtrl">
       <p>
-        URL of this page is:
+        The Time is:
       </p>
       <h3>
-        {{myUrl}}
+        {{Time}}
       </h3>
     </div>
-    <p>
-      This $location is used to get URL of the page.
-    </p>
     <script>
-    var app=angular.module('myApp', []);
-    app.controller('myCtrl', function($scope, $location){
-      $scope.myUrl= $location .absUrl();
-    });
+      var app=angular.module('myApp', []);
+      app.controller('myCtrl', function($scope, $interval){
+        $scope.Time= new Date().toLocaleString();
+        $interval(function(){
+          $scope.Time=new Date().toLocaleString();
+        }, 1000);
+      });
     </script>
   </body>
 </html>
