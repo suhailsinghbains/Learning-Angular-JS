@@ -1,22 +1,25 @@
-<!DoCTYPE html>
+<!DOCTYPE html>
+<html>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <body>
-    <div ng-app="myApp" ng-controller="myCtrl">
-      <p>
-        The Date and Time is:
-      </p>
-      <h3>
-        {{Time}}
-      </h3>
-    </div>
-    <script>
-      var app=angular.module('myApp', []);
-      app.controller('myCtrl', function($scope, $interval){
-        $scope.Time= new Date().toLocaleString();
-        $interval(function(){
-          $scope.Time=new Date().toLocaleString();
-        }, 1000);
+<body>
+  <div ng-app="myApp" ng-controller="customersCtrl">
+    <table>
+      <tr ng-repeat="x in names| orderBy: 'Country'">
+        <td ng-if="$odd" style="background-color:#f1f1f1">{{ x.Name }}</td>
+        <td ng-if="$even">{{ x.Name }}</td>
+        <td ng-if="$odd" style="background-color:#f1f1f1">{{ x.Country }}</td>
+        <td ng-if="$even">{{ x.Country }}</td>
+      </tr>
+    </table>
+  </div>
+  <script>
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function($scope, $http){
+      $http.get("https://www.w3schools.com/angular/customers.php")
+      .then(function(response){
+        $scope.names = response.data.records;
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
 </html>
