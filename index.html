@@ -2,17 +2,19 @@
 <html>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <body>
-  <div ng-app="" ng-init="myStatus=true">
-  <p>
-    <button ng-disabled="myStatus">Click Me!!</button>
-  </p>
-  <p>
-    <input type="checkbox" ng-model="myStatus"></input>Button
-  </p>
-  <p ng-hide="myStatus">I am visible</p>
-  <p>
-    {{myStatus}}
-  </p>
-</div>
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <h1 ng-mousemove="myFunc($event)">Mouse Over Me !!</h1>
+    <p>Co-ordinates: {{x + ' , ' + y}}</p>
+  </div>
+  <script>
+  var app = angular.module('myApp', []);
+  app.controller('myCtrl', function($scope){
+    $scope.myFunc= function(myE){
+      $scope.x=myE.clientX;
+      $scope.y=myE.clientY;
+    }
+  });
+  </script>
+  <p>The value of ClientX and ClientY is give to x and y respectively and then shown</p>
 </body>
 </html>
