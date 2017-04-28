@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<body>
-  <div ng-app="myApp" ng-controller="myCtrl">
-    <h1 ng-mousemove="myFunc($event)">Mouse Over Me !!</h1>
-    <p>Co-ordinates: {{x + ' , ' + y}}</p>
-  </div>
-  <script>
-  var app = angular.module('myApp', []);
-  app.controller('myCtrl', function($scope){
-    $scope.myFunc= function(myE){
-      $scope.x=myE.clientX;
-      $scope.y=myE.clientY;
+  <style>
+    @keyframes myChange {
+    from {
+      height: 100px;
+    } to {
+      height: 0;
     }
-  });
-  </script>
-  <p>The value of ClientX and ClientY is give to x and y respectively and then shown</p>
-</body>
+  }
+  div {
+    height: 100px;
+    background-color: lightblue;
+  }
+  div.ng-hide {
+    animation: 2s myChange;
+  }
+</style>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+  <body ng-app="myApp">
+    <h1>Hide the DIV: <input type="checkbox" ng-model="myCheck"></h1>
+    <div ng-hide="myCheck"></div>
+    <script>
+      var app=angular.module('myApp', ['ngAnimate']);
+    </script>
 </html>
